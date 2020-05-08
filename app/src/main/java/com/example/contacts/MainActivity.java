@@ -3,11 +3,14 @@ package com.example.contacts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 
@@ -16,6 +19,22 @@ public class MainActivity extends AppCompatActivity {
     public static Button button;
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
+    public static ListView list;
+    private ContactsDbAdapter db;
+
+    private void fillData() {
+        // Get all of the contacts from the database and create the item list
+        Cursor c = db.fetchAllContacts();
+        startManagingCursor(c);
+
+        String[] from = new String[] { ContactsDbAdapter.KEY_NAME };
+        int[] to = new int[] { R.id.name,R.id.firstname };
+
+        // Now create an array adapter and set it to display using our row
+        SimpleCursorAdapter contacts =
+                new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
+        list.setAdapter(contacts);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +42,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = findViewById(R.id.button3);
+
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+
+        db = new ContactsDbAdapter(this);
+        db.open();
+        fillData();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

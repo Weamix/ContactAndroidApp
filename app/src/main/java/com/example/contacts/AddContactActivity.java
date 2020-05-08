@@ -22,6 +22,8 @@ public class AddContactActivity extends AppCompatActivity {
     public static EditText address;
     public static Button add_contact;
     public static ListView list;
+    private static ArrayList<String> listContacts;
+    private ArrayAdapter<String> aa;
 
     private void fillData() {
         // Get all of the contacts from the database and create the item list
@@ -32,9 +34,9 @@ public class AddContactActivity extends AppCompatActivity {
         int[] to = new int[] { R.id.name,R.id.firstname };
 
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter notes =
+        SimpleCursorAdapter contacts =
                 new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
-        list.setAdapter(notes);
+        list.setAdapter(contacts);
     }
 
 
@@ -43,6 +45,8 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
+        listContacts = new ArrayList<String>() ;
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
 
         db = new ContactsDbAdapter(this);
         db.open();
