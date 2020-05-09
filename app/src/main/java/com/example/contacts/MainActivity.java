@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static ListView list;
     private ContactsDbAdapter db;
 
-    private void fillData() {
+    /*private void fillData() {
         // Get all of the contacts from the database and create the item list
         Cursor c = db.fetchAllContacts();
         startManagingCursor(c);
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleCursorAdapter contacts =
                 new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         db = new ContactsDbAdapter(this);
         db.open();
-        fillData();
+        //fillData();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

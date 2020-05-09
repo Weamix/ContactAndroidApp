@@ -36,7 +36,7 @@ public class ContactsDbAdapter {
      */
     private static final String DATABASE_CREATE =
             "create table contacts (_id integer primary key autoincrement, "
-                    + "name text null, firstname text null,phone text null, email text null, address text null );";
+                    + "name text not null, firstname text not null,phone text not null, email text null, address text null );";
 
     private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE = "contacts";
