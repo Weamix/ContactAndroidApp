@@ -22,7 +22,7 @@ public class ContactsDbAdapter {
 
     public static final String KEY_ROWID = "_id";
     public static final String KEY_NAME = "name";
-    public static final String KEY_FIRST_NAME = "first_name";
+    public static final String KEY_FIRSTNAME = "firstname";
     public static final String KEY_PHONE = "phone";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_ADDRESS = "address";
@@ -36,7 +36,7 @@ public class ContactsDbAdapter {
      */
     private static final String DATABASE_CREATE =
             "create table contacts (_id integer primary key autoincrement, "
-                    + "name text not null, first_name text not null,phone text not null, email text not null, address text not null );";
+                    + "name text not null, firstname text not null,phone text not null, email text not null, address text not null );";
 
     private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE = "contacts";
@@ -96,21 +96,21 @@ public class ContactsDbAdapter {
 
 
     /**
-     * Create a new contact using the name, first_name, phone, email and adress provided. If the contact is
+     * Create a new contact using the name, firstname, phone, email and adress provided. If the contact is
      * successfully created return the new rowId for that contact, otherwise return
      * a -1 to indicate failure.
      *
      * @param name the name of the contact
-     * @param first_name the first_name of the contact
+     * @param firstname the firstname of the contact
      * @param phone the phone of the contact
      * @param email the email of the contact
      * @param address the address of the contact
      * @return rowId or -1 if failed
      */
-    public long createContact(String name, String first_name, String phone, String email, String address) {
+    public long createContact(String name, String firstname, String phone, String email, String address) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
-        initialValues.put(KEY_FIRST_NAME, first_name);
+        initialValues.put(KEY_FIRSTNAME, firstname);
         initialValues.put(KEY_PHONE, phone);
         initialValues.put(KEY_EMAIL, email);
         initialValues.put(KEY_ADDRESS, address);
@@ -142,7 +142,7 @@ public class ContactsDbAdapter {
     public Cursor fetchAllContacts() {
 
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME,
-                KEY_FIRST_NAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, null, null, null, null, null);
+                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, null, null, null, null, null);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ContactsDbAdapter {
         Cursor mCursor =
 
                 mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-                                KEY_NAME, KEY_FIRST_NAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, KEY_ROWID + "=" + rowId, null,
+                                KEY_NAME, KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, KEY_ROWID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -168,20 +168,20 @@ public class ContactsDbAdapter {
 
     /**
      * Update the contact using the details provided. The contact to be updated is
-     * specified using the rowId, and it is altered to use the name,first_name,phone,email and address values passed in
+     * specified using the rowId, and it is altered to use the name,firstname,phone,email and address values passed in
      *
      * @param rowId id of contact to update
      * @param name value to set contact name to
-     * @param first_name value to set contact first_name to
+     * @param firstname value to set contact firstname to
      * @param phone value to set contact phone to
      * @param email value to set contact email to
      * @param address value to set contact address to
      * @return true if the contact was successfully updated, false otherwise
      */
-    public boolean updateContact(long rowId, String name, String first_name, String phone, String email, String address) {
+    public boolean updateContact(long rowId, String name, String firstname, String phone, String email, String address) {
         ContentValues args = new ContentValues();
         args.put(KEY_NAME, name);
-        args.put(KEY_FIRST_NAME, first_name);
+        args.put(KEY_FIRSTNAME, firstname);
         args.put(KEY_PHONE, phone);
         args.put(KEY_EMAIL, email);
         args.put(KEY_ADDRESS, address);

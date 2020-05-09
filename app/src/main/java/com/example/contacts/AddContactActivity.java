@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class AddContactActivity extends AppCompatActivity {
     private ContactsDbAdapter db;
     public static EditText name;
-    public static EditText first_name;
+    public static EditText firstname;
     public static EditText phone;
     public static EditText email;
     public static EditText address;
@@ -32,7 +32,7 @@ public class AddContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_contact);
 
         name = findViewById(R.id.name);
-        first_name = findViewById(R.id.first_name);
+        firstname = findViewById(R.id.firstname);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         address = findViewById(R.id.address);
@@ -50,10 +50,10 @@ public class AddContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 listContacts.add(0, name.getText().toString());
-                listContacts.add(1,first_name.getText().toString());
-                db.createContact(name.getText().toString(),first_name.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
+                listContacts.add(1,firstname.getText().toString());
+                db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
                 name.setText("");
-                first_name.setText("");
+                firstname.setText("");
                 phone.setText("");
                 email.setText("");
                 address.setText("");
