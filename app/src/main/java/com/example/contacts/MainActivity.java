@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> aa;
     public static ListView list;
     private ContactsDbAdapter db;
+
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private void fillData() {
         // Get all of the contacts from the database and create the item list
@@ -67,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
+                TextView TextView = findViewById(R.id.name);
+                String name = TextView.getText().toString();
+                i.putExtra(EXTRA_MESSAGE, name);
                 startActivity(i);
             }
         });
