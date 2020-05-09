@@ -45,17 +45,27 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
+        name = findViewById(R.id.name);
+        firstname = findViewById(R.id.firstname);
+        phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
+        address = findViewById(R.id.address);
+
+        add_contact = findViewById(R.id.add_contact);
+
+        list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
 
         db = new ContactsDbAdapter(this);
         db.open();
-        fillData();
+        //fillData();
 
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //listContacts.add(0, name.getText().toString(),firstname.getText().toString());
+                listContacts.add(0, name.getText().toString());
+                listContacts.add(1,firstname.getText().toString());
                 db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
                 name.setText("");
                 firstname.setText("");

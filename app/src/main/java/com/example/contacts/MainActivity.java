@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button3);
 
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
 
         db = new ContactsDbAdapter(this);
         db.open();
