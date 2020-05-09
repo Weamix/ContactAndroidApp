@@ -41,8 +41,7 @@ public class AddContactActivity extends AppCompatActivity {
 
         list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
-
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
         db = new ContactsDbAdapter(this);
         db.open();
 
