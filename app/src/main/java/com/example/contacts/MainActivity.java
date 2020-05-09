@@ -22,19 +22,18 @@ public class MainActivity extends AppCompatActivity {
     public static ListView list;
     private ContactsDbAdapter db;
 
-    /*private void fillData() {
+    private void fillData() {
         // Get all of the contacts from the database and create the item list
         Cursor c = db.fetchAllContacts();
         startManagingCursor(c);
 
         String[] from = new String[] { ContactsDbAdapter.KEY_NAME };
-        int[] to = new int[] { R.id.name,R.id.firstname };
+        int[] to = new int[] { R.id.name };
 
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter contacts =
-                new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
+        SimpleCursorAdapter contacts =new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button3);
 
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
 
         db = new ContactsDbAdapter(this);
         db.open();
-        //fillData();
+        fillData();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
