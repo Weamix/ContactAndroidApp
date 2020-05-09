@@ -78,19 +78,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         Cursor SelectedTaskCursor = (Cursor) list.getItemAtPosition(info.position);
-        final String SelectedTask = SelectedTaskCursor.getString(SelectedTaskCursor.getColumnIndex("name"));
+        final long SelectedTask = SelectedTaskCursor.getString(SelectedTaskCursor.getColumnIndex("_id"));
 
         switch (item.getItemId()) {
             case R.id.delete_contact :
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //todoItems.remove(position);
-                        db.deleteContact(id);
-                        //aa.notifyDataSetChanged();
-                        fillData();
-                    }
-                });
+                db.deleteContact(SelectedTask);
             default:
                 return super.onContextItemSelected(item);
         }
