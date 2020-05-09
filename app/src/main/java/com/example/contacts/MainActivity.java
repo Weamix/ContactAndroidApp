@@ -4,7 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -57,5 +62,37 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        registerForContextMenu(list);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_contextuel, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Cursor SelectedTaskCursor = (Cursor) list.getItemAtPosition(info.position);
+        final String SelectedTask = SelectedTaskCursor.getString(SelectedTaskCursor.getColumnIndex("name"));
+
+        switch (item.getItemId()) {
+            case R.id.delete_contact :
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        //todoItems.remove(position);
+                        db.deleteContact(id);
+                        //aa.notifyDataSetChanged();
+                        fillData();
+                    }
+                });
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 }
