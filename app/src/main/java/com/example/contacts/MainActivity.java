@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor c = db.fetchAllContacts();
         startManagingCursor(c);
 
-        String[] from = new String[] { ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME};
+        String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME};
         int[] to = new int[] { R.id.name,R.id.firstname };
 
         // Now create an array adapter and set it to display using our row
@@ -70,9 +70,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
-                //TextView TextView = findViewById(R.id._id);
-                //String name = TextView.getText().toString();
-                i.putExtra(EXTRA_MESSAGE, id); //id
+
+                String UserInfo = list.getItemAtPosition(position).toString();
+                //String userId = UserInfo.substring(0, UserInfo .indexOf(" "));
+
+                //String item = list.getItemAtPosition(position);
+                //Toast.makeText(this,"You selected : " + item,Toast.LENGTH_SHORT).show();
+
+                TextView TextView = findViewById(R.id.name);
+                String name = TextView.getText().toString();
+                i.putExtra("id", 1); //id
                 startActivity(i);
             }
         });
