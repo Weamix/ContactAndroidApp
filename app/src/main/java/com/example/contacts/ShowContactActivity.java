@@ -25,7 +25,7 @@ public class ShowContactActivity extends AppCompatActivity {
     private void fillData() {
         // Get all of the contacts from the database and create the item list
 
-        long id = getIntent().getLongExtra("id",5);
+        long id = getIntent().getLongExtra("id",38);
 
 
         Cursor c = db.fetchContact(id);
