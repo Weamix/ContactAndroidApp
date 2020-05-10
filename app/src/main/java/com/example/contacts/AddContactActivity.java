@@ -1,5 +1,6 @@
 package com.example.contacts;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -56,6 +57,8 @@ public class AddContactActivity extends AppCompatActivity {
                 phone.setText("");
                 email.setText("");
                 address.setText("");
+                Intent i = new Intent(AddContactActivity.this, MainActivity.class);
+                startActivity(i);
             }
         });
 

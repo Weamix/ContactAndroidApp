@@ -142,7 +142,7 @@ public class ContactsDbAdapter {
     public Cursor fetchAllContacts() {
 
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME,
-                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, null, null, null, null, null);
+                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, null, null, null, null, KEY_NAME);
     }
 
     /**
