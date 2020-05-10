@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 //Toast.makeText(this,"You selected : " + item,Toast.LENGTH_SHORT).show();
 
                 TextView TextView = findViewById(R.id.name);
-                String name = TextView.getText().toString();
-                i.putExtra("id", 1); //id
+                String firstname = TextView.getText().toString();
+                i.putExtra("id", UserInfo); //id
                 startActivity(i);
             }
         });
