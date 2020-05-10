@@ -49,18 +49,23 @@ public class AddContactActivity extends AppCompatActivity {
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listContacts.add(0, name.getText().toString());
-                listContacts.add(1,firstname.getText().toString());
-                db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
-                name.setText("");
-                firstname.setText("");
-                phone.setText("");
-                email.setText("");
-                address.setText("");
-                Intent i = new Intent(AddContactActivity.this, MainActivity.class);
-                startActivity(i);
+                // On teste si les champs nom,prenom ou le téléphone sont vides
+                if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
+                    add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
+                }else {
+                    listContacts.add(0, name.getText().toString());
+                    listContacts.add(1,firstname.getText().toString());
+                    db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
+                    name.setText("");
+                    firstname.setText("");
+                    phone.setText("");
+                    email.setText("");
+                    address.setText("");
+                    Intent i = new Intent(AddContactActivity.this, MainActivity.class);
+                    startActivity(i);
+                }
+                add_contact.setEnabled(true);
             }
         });
-
     }
 }

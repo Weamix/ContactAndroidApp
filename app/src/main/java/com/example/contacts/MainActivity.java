@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         int[] to = new int[] { R.id.name,R.id.firstname };
 
         // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter contacts =new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
+        SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
     }
 

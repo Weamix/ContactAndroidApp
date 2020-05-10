@@ -31,5 +31,7 @@ public class ShowContactActivity extends AppCompatActivity {
         name.setText(message);
 
 
+
+
     }
 }
