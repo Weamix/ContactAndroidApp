@@ -25,14 +25,14 @@ public class ShowContactActivity extends AppCompatActivity {
     private void fillData() {
         // Get all of the contacts from the database and create the item list
 
-        long id = getIntent().getLongExtra("id",37);
+        long id = getIntent().getLongExtra("id",5);
 
 
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
 
     String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME,ContactsDbAdapter.KEY_PHONE,ContactsDbAdapter.KEY_EMAIL,ContactsDbAdapter.KEY_ADDRESS};
-        int[] to = new int[] { R.id.name,R.id.firstname };
+        int[] to = new int[] { R.id.name,R.id.firstname,R.id.address,R.id.email,R.id.phone};
 
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contact, c, from, to);
