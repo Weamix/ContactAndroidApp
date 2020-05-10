@@ -23,11 +23,10 @@ public class ShowContactActivity extends AppCompatActivity {
     public static ListView list;
 
     private void fillData() {
-        // Get all of the contacts from the database and create the item list
+        // Get  the contact by id from the database and create the item list
 
         long id = getIntent().getLongExtra("id",38);
-
-
+        
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
 

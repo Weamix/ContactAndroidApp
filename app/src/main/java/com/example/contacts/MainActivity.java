@@ -74,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 String UserInfo = list.getItemAtPosition(position).toString();
                 //String userId = UserInfo.substring(0, UserInfo .indexOf(" "));
 
-                //String item = list.getItemAtPosition(position);
-                //Toast.makeText(this,"You selected : " + item,Toast.LENGTH_SHORT).show();
-
                 TextView TextView = findViewById(R.id.name);
                 String firstname = TextView.getText().toString();
                 i.putExtra("id", UserInfo); //id
