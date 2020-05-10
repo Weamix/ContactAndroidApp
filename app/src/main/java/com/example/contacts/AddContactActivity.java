@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -52,6 +53,8 @@ public class AddContactActivity extends AppCompatActivity {
                 // On teste si les champs nom,prenom ou le téléphone sont vides
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
+                    //AlertDialog.Builder builder = new AlertDialog.Builder(this.);
+                    //builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
                 }else {
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());

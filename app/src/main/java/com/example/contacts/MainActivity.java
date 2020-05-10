@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
-                TextView TextView = findViewById(R.id.name);
-                String name = TextView.getText().toString();
-                i.putExtra(EXTRA_MESSAGE, name);
+                //TextView TextView = findViewById(R.id._id);
+                //String name = TextView.getText().toString();
+                i.putExtra(EXTRA_MESSAGE, id); //id
                 startActivity(i);
             }
         });

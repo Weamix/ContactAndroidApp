@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="dialog_message">Veuillez renseignez les champs nom,prénom et télèphone</string>
+    <string name="dialog_title">ATTENTION</string>
 </resources>
