@@ -10,15 +10,25 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="162dp"
-        android:layout_height="58dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="571dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="38dp" />
+        app:layout_constraintBottom_toTopOf="@+id/mail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="415dp"
-        android:layout_height="406dp">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="175dp"
+        app:layout_constraintBottom_toTopOf="@+id/call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 
@@ -26,32 +36,50 @@
         android:id="@+id/call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="38dp"
         android:text="Appeler"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="581dp" />
+        app:layout_constraintBottom_toTopOf="@+id/mail"
+        app:layout_constraintEnd_toStartOf="@+id/message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list" />
 
     <Button
         android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="16dp"
         android:text="Mail"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="667dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/localize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <Button
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="38dp"
         android:text="Message"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="581dp" />
+        app:layout_constraintBottom_toTopOf="@+id/localize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/call" />
 
     <Button
         android:id="@+id/localize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="16dp"
         android:text="Localiser"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="667dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

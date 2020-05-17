@@ -24,6 +24,9 @@ public class ShowContactActivity extends AppCompatActivity {
     private ArrayAdapter<String> aa;
     public static ListView list;
     public static Button call;
+    public static Button localize;
+    public static Button message;
+    public static Button mail;
 
     private void fillData() {
         // Get  the contact by idw from the database and create the item list
@@ -53,7 +56,10 @@ public class ShowContactActivity extends AppCompatActivity {
         name.setText(id);
 
         list = findViewById(R.id.list);
+        localize = findViewById(R.id.localize);
         call = findViewById(R.id.call);
+        message = findViewById(R.id.message);
+        mail = findViewById(R.id.mail);
 
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);
@@ -62,7 +68,35 @@ public class ShowContactActivity extends AppCompatActivity {
         fillData();
 
 
+        localize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
+            }
+        });
+
+
         call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                startActivity(intent);
+            }
+        });
+
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
+            }
+        });
+
+        mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Uri location = Uri.parse("geo:0,0?q="+R.id.address);
