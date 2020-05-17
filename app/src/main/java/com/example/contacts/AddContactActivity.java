@@ -1,16 +1,13 @@
 package com.example.contacts;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class AddContactActivity extends AppCompatActivity {
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // On teste si les champs nom,prenom ou le téléphone sont vides
+                // On teste si les champs nom,prenom ou le téléphone sont biens remplis (non vides)
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
                     //AlertDialog.Builder builder = new AlertDialog.Builder(this.);

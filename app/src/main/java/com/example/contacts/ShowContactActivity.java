@@ -1,22 +1,18 @@
 package com.example.contacts;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 
@@ -58,6 +54,8 @@ public class ShowContactActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         name.setText(id);
+        final View phone = findViewById(R.id.phone);
+
 
         list = findViewById(R.id.list);
         localize = findViewById(R.id.localize);
@@ -71,30 +69,26 @@ public class ShowContactActivity extends AppCompatActivity {
         db.open();
         fillData();
 
-
         localize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.v("address",Integer.toString(R.id.address));
                 Uri location = Uri.parse("geo:0,0?q="+R.id.address);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
             }
         });
 
-
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView call = findViewById(R.id.phone);
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("Mettre le téléphone ici"));
-                if (ActivityCompat.checkSelfPermission(ShowContactActivity.this,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" +phone));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
                 }
-                startActivity(intent);
             }
         });
-
 
         message.setOnClickListener(new View.OnClickListener() {
             @Override
