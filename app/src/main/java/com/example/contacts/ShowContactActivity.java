@@ -85,7 +85,7 @@ public class ShowContactActivity extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView call = findViewById(R.id.phone)
+                TextView call = findViewById(R.id.phone);
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("Mettre le téléphone ici"));
                 if (ActivityCompat.checkSelfPermission(ShowContactActivity.this,
                         Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +114,7 @@ public class ShowContactActivity extends AppCompatActivity {
                 email.putExtra(Intent.EXTRA_SUBJECT, "subject");
                 email.putExtra(Intent.EXTRA_TEXT   , "Message Body");
 
-//need this to prompts email client only
+                //need this to prompts email client only
                 email.setType("message/rfc822");
 
                 startActivity(Intent.createChooser(email, "Choose an Email client :"));
