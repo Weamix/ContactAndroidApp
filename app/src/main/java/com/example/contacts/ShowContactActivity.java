@@ -1,9 +1,12 @@
 package com.example.contacts;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +16,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 
@@ -81,7 +85,12 @@ public class ShowContactActivity extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+                TextView call = findViewById(R.id.phone)
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("Mettre le téléphone ici"));
+                if (ActivityCompat.checkSelfPermission(ShowContactActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
                 startActivity(intent);
             }
         });
@@ -90,18 +99,25 @@ public class ShowContactActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-                startActivity(mapIntent);
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.putExtra("sms_body", "default content");
+                sendIntent.setType("vnd.android-dir/mms-sms");
+                startActivity(sendIntent);
             }
         });
 
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
-                startActivity(mapIntent);
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL  , new String[]{"Recipient"});
+                email.putExtra(Intent.EXTRA_SUBJECT, "subject");
+                email.putExtra(Intent.EXTRA_TEXT   , "Message Body");
+
+//need this to prompts email client only
+                email.setType("message/rfc822");
+
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
             }
         });
     }
