@@ -2,9 +2,11 @@ package com.example.contacts;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -21,6 +23,7 @@ public class ShowContactActivity extends AppCompatActivity {
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
+    public static Button call;
 
     private void fillData() {
         // Get  the contact by idw from the database and create the item list
@@ -50,13 +53,22 @@ public class ShowContactActivity extends AppCompatActivity {
         name.setText(id);
 
         list = findViewById(R.id.list);
+        call = findViewById(R.id.call);
 
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);
-
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
 
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
+            }
+        });
     }
 }
