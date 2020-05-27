@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,9 +26,17 @@ public class ShowContactActivity extends AppCompatActivity {
     public static Button localize;
     public static Button message;
     public static Button mail;
-    public String addresstest;
+    public String firstnameTxt;
+    public String lastnameTxt;
+    public String phoneTxt;
+    public String emailTxt;
+    public String addressTxt;
 
     private void fillData() {
+        final TextView firstname = findViewById(R.id.firstnameTxt);
+        final TextView lastname = findViewById(R.id.lastnameTxt);
+        final TextView phone = findViewById(R.id.phoneTxt);
+        final TextView email = findViewById(R.id.emailTxt);
         final TextView address = findViewById(R.id.addressTxt);
 
         // Get  the contact by idw from the database and create the item list
@@ -39,26 +46,23 @@ public class ShowContactActivity extends AppCompatActivity {
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
 
-        String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME,ContactsDbAdapter.KEY_PHONE,ContactsDbAdapter.KEY_EMAIL,ContactsDbAdapter.KEY_ADDRESS};
-        int[] to = new int[] { R.id.name,R.id.firstname,R.id.address,R.id.email,R.id.phone};
-
-        // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contact, c, from, to);
-        list.setAdapter(contacts);
-
-        Cursor c2 = db.fetchContact(id);
-        startManagingCursor(c2);
-
-        //to be continued :D Remove list view elements by text view and fix intents
-        if(c2.moveToFirst()){
+        if(c.moveToFirst()){
             do{
-                addresstest = c2.getString(c2.getColumnIndex("address"));
-                //String varaible2 = cursor.getString(cursor.getColumnIndex("column_name2"));
-                address.setText(c2.getString(c2.getColumnIndex("address")));
+                firstnameTxt = c.getString(c.getColumnIndex("firstname"));
+                lastnameTxt = c.getString(c.getColumnIndex("name"));
+                phoneTxt = c.getString(c.getColumnIndex("phone"));
+                emailTxt = c.getString(c.getColumnIndex("email"));
+                addressTxt = c.getString(c.getColumnIndex("address"));
 
-            }while (c2.moveToNext());
+                firstname.setText(c.getString(c.getColumnIndex("firstname")));
+                lastname.setText(c.getString(c.getColumnIndex("name")));
+                phone.setText(c.getString(c.getColumnIndex("phone")));
+                email.setText(c.getString(c.getColumnIndex("email")));
+                address.setText(c.getString(c.getColumnIndex("address")));
+
+            }while (c.moveToNext());
         }
-        c2.close();
+        c.close();
     }
 
     @Override
@@ -68,9 +72,6 @@ public class ShowContactActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        final TextView phone = findViewById(R.id.phone);
-
 
         list = findViewById(R.id.list);
         localize = findViewById(R.id.localize);
@@ -90,7 +91,7 @@ public class ShowContactActivity extends AppCompatActivity {
             public void onClick(View view) {
                 db.open();
                 fillData();
-                Uri location = Uri.parse("geo:0,0?q="+addresstest);
+                Uri location = Uri.parse("geo:0,0?q="+addressTxt);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
             }
@@ -100,7 +101,7 @@ public class ShowContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" +phone));
+                intent.setData(Uri.parse("tel:" +phoneTxt));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -121,14 +122,19 @@ public class ShowContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL  , new String[]{"Recipient"});
+
+                email.setData(Uri.parse("mailto:"+emailTxt));
+                email.setType("text/plain");
+
+                /*email.putExtra(Intent.EXTRA_EMAIL  , new String[]{"Recipient"});
                 email.putExtra(Intent.EXTRA_SUBJECT, "subject");
                 email.putExtra(Intent.EXTRA_TEXT   , "Message Body");
 
                 //need this to prompts email client only
-                email.setType("message/rfc822");
+                email.setType("message/rfc822");*/
 
-                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                //startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                startActivity(email);
             }
         });
     }

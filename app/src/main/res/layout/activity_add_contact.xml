@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/emailTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -19,14 +19,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="71dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/phone"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintStart_toStartOf="@+id/phoneTxt"
+        app:layout_constraintTop_toBottomOf="@+id/phoneTxt" />
 
     <TextView
         android:id="@+id/textView4"
@@ -37,7 +37,7 @@
         android:layout_marginTop="36dp"
         android:text="Télèphone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+        app:layout_constraintTop_toBottomOf="@+id/firstnameTxt" />
 
     <EditText
         android:id="@+id/address"
@@ -66,8 +66,8 @@
         android:layout_marginLeft="7dp"
         android:layout_marginBottom="16dp"
         android:text="Mail"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="@+id/email" />
+        app:layout_constraintBottom_toTopOf="@+id/emailTxt"
+        app:layout_constraintStart_toStartOf="@+id/emailTxt" />
 
     <TextView
         android:id="@+id/textView2"
@@ -77,11 +77,11 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="37dp"
         android:text="Nom"
-        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/emailTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/firstnameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -89,10 +89,10 @@
         android:layout_marginTop="60dp"
         android:ems="10"
         app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
     <EditText
-        android:id="@+id/phone"
+        android:id="@+id/phoneTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="29dp"
@@ -107,15 +107,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Adresse"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintStart_toStartOf="@+id/emailTxt"
+        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prénom"
-        app:layout_constraintBottom_toTopOf="@+id/firstname"
-        app:layout_constraintStart_toStartOf="@+id/firstname" />
+        app:layout_constraintBottom_toTopOf="@+id/firstnameTxt"
+        app:layout_constraintStart_toStartOf="@+id/firstnameTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

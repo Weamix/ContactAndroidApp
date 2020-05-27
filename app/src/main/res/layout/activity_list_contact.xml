@@ -7,18 +7,18 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/emailTxt"
         android:layout_width="205dp"
         android:layout_height="35dp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/phone"
+        app:layout_constraintBottom_toTopOf="@+id/phoneTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+        app:layout_constraintTop_toBottomOf="@+id/firstnameTxt" />
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/emailTxt"
         android:layout_width="205dp"
         android:layout_height="35dp"
         android:textSize="30sp"
@@ -26,14 +26,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneTxt" />
 
     <TextView
-        android:id="@+id/firstname"
+        android:id="@+id/firstnameTxt"
         android:layout_width="205dp"
         android:layout_height="35dp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintBottom_toTopOf="@+id/emailTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,17 +48,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
     <TextView
-        android:id="@+id/phone"
+        android:id="@+id/phoneTxt"
         android:layout_width="205dp"
         android:layout_height="35dp"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintBottom_toTopOf="@+id/emailTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
