@@ -111,10 +111,13 @@ public class ShowContactActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                sendIntent.putExtra("sms_body", "default content");
-                sendIntent.setType("vnd.android-dir/mms-sms");
-                startActivity(sendIntent);
+                //Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+
+                Uri uri = Uri.parse("smsto:"+phoneTxt);
+                Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                intent.putExtra("sms_body", "");
+                startActivity(intent);
+
             }
         });
 
@@ -124,8 +127,7 @@ public class ShowContactActivity extends AppCompatActivity {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto",emailTxt, null));
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
-                startActivity(Intent.createChooser(emailIntent, "Send email..."));
-                
+                startActivity(Intent.createChooser(emailIntent, ""));
             }
         });
     }
