@@ -7,22 +7,20 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/emailTxt"
+        android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:textSize="30sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/firstnameTxt"
-        app:layout_constraintEnd_toStartOf="@+id/firstnameTxt"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/firstnameTxt"
+        android:id="@+id/firstname"
         android:layout_width="0dp"
         android:layout_height="33dp"
         android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/emailTxt"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

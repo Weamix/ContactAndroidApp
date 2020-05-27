@@ -30,10 +30,10 @@ public class AddContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
 
-        name = findViewById(R.id.emailTxt);
-        firstname = findViewById(R.id.firstnameTxt);
-        phone = findViewById(R.id.phoneTxt);
-        email = findViewById(R.id.emailTxt);
+        name = findViewById(R.id.name);
+        firstname = findViewById(R.id.firstname);
+        phone = findViewById(R.id.phone);
+        email = findViewById(R.id.name);
         address = findViewById(R.id.address);
 
         add_contact = findViewById(R.id.add_contact);

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,7 +76,7 @@ public class ShowContactActivity extends AppCompatActivity {
         localize = findViewById(R.id.localize);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
-        mail = findViewById(R.id.mail);
+        mail = findViewById(R.id.name);
 
 
         listContacts = new ArrayList<String>() ;
