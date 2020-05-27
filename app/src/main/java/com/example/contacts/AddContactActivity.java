@@ -33,7 +33,7 @@ public class AddContactActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         firstname = findViewById(R.id.firstname);
         phone = findViewById(R.id.phone);
-        email = findViewById(R.id.name);
+        email = findViewById(R.id.mail);
         address = findViewById(R.id.address);
 
         add_contact = findViewById(R.id.add_contact);
