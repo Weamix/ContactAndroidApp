@@ -69,21 +69,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
 
-
                 Bundle b = new Bundle();
                 b.putLong("id", id); //Your id
                 i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
                 finish();
-
-                /*
-                String UserInfo = list.getItemAtPosition(position).toString();
-                String userId = UserInfo.substring(0, UserInfo .indexOf(" "));
-                TextView TextView = findViewById(R.id.name);
-                String firstname = TextView.getText().toString();
-                i.putExtra("id", UserInfo); //id
-                startActivity(i);
-                 */
 
             }
         });

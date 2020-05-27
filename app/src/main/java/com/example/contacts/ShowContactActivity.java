@@ -27,8 +27,11 @@ public class ShowContactActivity extends AppCompatActivity {
     public static Button localize;
     public static Button message;
     public static Button mail;
+    public String addresstest;
 
     private void fillData() {
+        final TextView address = findViewById(R.id.addressTxt);
+
         // Get  the contact by idw from the database and create the item list
 
         long id = getIntent().getLongExtra("id",38);
@@ -36,12 +39,26 @@ public class ShowContactActivity extends AppCompatActivity {
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
 
-    String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME,ContactsDbAdapter.KEY_PHONE,ContactsDbAdapter.KEY_EMAIL,ContactsDbAdapter.KEY_ADDRESS};
+        String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME,ContactsDbAdapter.KEY_PHONE,ContactsDbAdapter.KEY_EMAIL,ContactsDbAdapter.KEY_ADDRESS};
         int[] to = new int[] { R.id.name,R.id.firstname,R.id.address,R.id.email,R.id.phone};
 
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contact, c, from, to);
         list.setAdapter(contacts);
+
+        Cursor c2 = db.fetchContact(id);
+        startManagingCursor(c2);
+
+        //to be continued :D Remove list view elements by text view and fix intents
+        if(c2.moveToFirst()){
+            do{
+                addresstest = c2.getString(c2.getColumnIndex("address"));
+                //String varaible2 = cursor.getString(cursor.getColumnIndex("column_name2"));
+                address.setText(c2.getString(c2.getColumnIndex("address")));
+
+            }while (c2.moveToNext());
+        }
+        c2.close();
     }
 
     @Override
@@ -52,9 +69,7 @@ public class ShowContactActivity extends AppCompatActivity {
         Intent i = getIntent();
         String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-        name = findViewById(R.id.name);
-        name.setText(id);
-        final View phone = findViewById(R.id.phone);
+        final TextView phone = findViewById(R.id.phone);
 
 
         list = findViewById(R.id.list);
@@ -62,6 +77,7 @@ public class ShowContactActivity extends AppCompatActivity {
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
         mail = findViewById(R.id.mail);
+
 
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);
@@ -72,8 +88,9 @@ public class ShowContactActivity extends AppCompatActivity {
         localize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("address",Integer.toString(R.id.address));
-                Uri location = Uri.parse("geo:0,0?q="+R.id.address);
+                db.open();
+                fillData();
+                Uri location = Uri.parse("geo:0,0?q="+addresstest);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
             }
