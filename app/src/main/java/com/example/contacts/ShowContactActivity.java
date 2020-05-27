@@ -121,28 +121,11 @@ public class ShowContactActivity extends AppCompatActivity {
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent email = new Intent(Intent.ACTION_SEND);
-
-                //email.setData(Uri.parse("mailto:"+emailTxt));
-                //email.setType("text/plain");
-
-                //email.putExtra(Intent.EXTRA_EMAIL  , new String[]{"+emailTxt)"});
-                //email.putExtra(Intent.EXTRA_SUBJECT, "subject");
-                //email.putExtra(Intent.EXTRA_TEXT   , "Message Body");
-
-                //need this to prompts email client only
-                //email.setType("message/rfc822");*/
-
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                         "mailto",emailTxt, null));
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt); // String[] addresses
-
-                //emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                //emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
-
-                //startActivity(Intent.createChooser(email, "Choose an Email client :"));
-                //startActivity(email);
+                
             }
         });
     }
