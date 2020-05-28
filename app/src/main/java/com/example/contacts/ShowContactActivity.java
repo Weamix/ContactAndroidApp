@@ -136,7 +136,7 @@ public class ShowContactActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ShowContactActivity.this, AddContactActivity.class);
+                Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
                 startActivity(i);
             }
         });
