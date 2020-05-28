@@ -1,12 +1,14 @@
 package com.example.contacts;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,11 +26,52 @@ public class EditContactActivity extends AppCompatActivity {
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
 
+    public String firstnameEdit;
+    public String lastnameEdit;
+    public String phoneEdit;
+    public String emailEdit;
+    public String addressEdit;
+
+    private void fillData() {
+        final TextView firstname = findViewById(R.id.firstnameEdit);
+        final TextView lastname = findViewById(R.id.nameEdit);
+        final TextView phone = findViewById(R.id.phoneEdit);
+        final TextView email = findViewById(R.id.mailEdit);
+        final TextView address = findViewById(R.id.addressEdit);
+
+        // Get  the contact by idw from the database and create the item list
+
+        long id = getIntent().getLongExtra("id",38);
+
+        Cursor c = db.fetchContact(id);
+        startManagingCursor(c);
+
+        if(c.moveToFirst()){
+            do{
+                firstnameEdit = c.getString(c.getColumnIndex("firstname"));
+                lastnameEdit = c.getString(c.getColumnIndex("name"));
+                phoneEdit = c.getString(c.getColumnIndex("phone"));
+                emailEdit = c.getString(c.getColumnIndex("email"));
+                addressEdit = c.getString(c.getColumnIndex("address"));
+
+                firstname.setText(c.getString(c.getColumnIndex("firstname")));
+                lastname.setText(c.getString(c.getColumnIndex("name")));
+                phone.setText(c.getString(c.getColumnIndex("phone")));
+                email.setText(c.getString(c.getColumnIndex("email")));
+                address.setText(c.getString(c.getColumnIndex("address")));
+
+            }while (c.moveToNext());
+        }
+        c.close();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
+
+        Intent i = getIntent();
+        final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         name = findViewById(R.id.nameEdit);
         firstname = findViewById(R.id.firstnameEdit);
@@ -41,8 +84,16 @@ public class EditContactActivity extends AppCompatActivity {
         list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+
         db = new ContactsDbAdapter(this);
         db.open();
+        fillData();
+
+        name.setText(lastnameEdit);
+        firstname.setText(firstnameEdit);
+        phone.setText(phoneEdit);
+        email.setText(emailEdit);
+        address.setText(addressEdit);
 
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +107,11 @@ public class EditContactActivity extends AppCompatActivity {
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());
                     db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
+                    firstname.setText("");
                     name.setText("");
-                    firstname.setText("wassim");
-                    phone.setText("a cassé");
-                    email.setText("son");
-                    address.setText("layout");
+                    phone.setText("");
+                    email.setText("");
+                    address.setText("");
                     Intent i = new Intent(EditContactActivity.this, MainActivity.class);
                     startActivity(i);
                 }

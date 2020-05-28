@@ -71,7 +71,7 @@ public class ShowContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_contact);
 
         Intent i = getIntent();
-        String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         list = findViewById(R.id.list);
         localize = findViewById(R.id.localize);
@@ -137,7 +137,12 @@ public class ShowContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
+
+                Bundle b = new Bundle();
+                b.putString("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
+                finish();
             }
         });
     }
