@@ -30,6 +30,7 @@ public class ShowContactActivity extends AppCompatActivity {
     public String phoneTxt;
     public String emailTxt;
     public String addressTxt;
+    public static Button button;
 
     private void fillData() {
         final TextView firstname = findViewById(R.id.firstnameTxt);
@@ -77,6 +78,8 @@ public class ShowContactActivity extends AppCompatActivity {
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
         mail = findViewById(R.id.name);
+
+        button = findViewById(R.id.button);
 
 
         listContacts = new ArrayList<String>() ;
@@ -127,6 +130,14 @@ public class ShowContactActivity extends AppCompatActivity {
                         "mailto",emailTxt, null));
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
                 startActivity(Intent.createChooser(emailIntent, ""));
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ShowContactActivity.this, AddContactActivity.class);
+                startActivity(i);
             }
         });
     }
