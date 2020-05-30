@@ -31,6 +31,7 @@ public class ShowContactActivity extends AppCompatActivity {
     public String emailTxt;
     public String addressTxt;
     public static Button button;
+    public static Button buttonBack;
 
     private void fillData() {
         final TextView firstname = findViewById(R.id.firstnameTxt);
@@ -70,10 +71,10 @@ public class ShowContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_contact);
 
-        Intent i = getIntent();
+        /*Intent i = getIntent();
         final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-        list = findViewById(R.id.list);
+        list = findViewById(R.id.list);*/
         localize = findViewById(R.id.localize);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
@@ -82,8 +83,8 @@ public class ShowContactActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
 
-        listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);
+        /*listContacts = new ArrayList<String>() ;
+        aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);*/
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
@@ -91,8 +92,8 @@ public class ShowContactActivity extends AppCompatActivity {
         localize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.open();
-                fillData();
+                /*db.open();
+                fillData();*/
                 Uri location = Uri.parse("geo:0,0?q="+addressTxt);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
@@ -145,6 +146,15 @@ public class ShowContactActivity extends AppCompatActivity {
                 i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
                 finish();
+            }
+        });
+
+        buttonBack = (Button) findViewById(R.id.back);
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRetour = new Intent(ShowContactActivity.this, MainActivity.class);
+                startActivity(intentRetour);
             }
         });
     }
