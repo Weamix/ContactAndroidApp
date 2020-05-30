@@ -104,9 +104,12 @@ public class EditContactActivity extends AppCompatActivity {
                     //AlertDialog.Builder builder = new AlertDialog.Builder(this.);
                     //builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
                 }else {
+
+                    long id = getIntent().getLongExtra("id",18);
+
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());
-                    db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
+                    db.updateContact(id,name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
                     firstname.setText("");
                     name.setText("");
                     phone.setText("");
