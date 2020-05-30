@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Contacts</string>
-    <string name="dialog_message">Veuillez renseignez les champs nom,prénom et télèphone</string>
+    <string name="dialog_message1">Veuillez renseignez les champs nom,prénom et télèphone</string>
+    <string name="dialog_title1">ATTENTION</string>
+    <string name="dialog_message">êtes-vous sûr de vouloir effacer le contact?</string>
     <string name="dialog_title">ATTENTION</string>
+    <string name="ok">Oui</string>
+    <string name="cancel">Non</string>
 </resources>
