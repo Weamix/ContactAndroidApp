@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     public static ListView list;
     private ContactsDbAdapter db;
 
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    //public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private void fillData() {
         // Get all of the contacts from the database and create the item list

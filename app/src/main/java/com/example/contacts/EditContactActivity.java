@@ -70,8 +70,8 @@ public class EditContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-        Intent i = getIntent();
-        final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        //Intent i = getIntent();
+        //final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         name = findViewById(R.id.nameEdit);
         firstname = findViewById(R.id.firstnameEdit);
@@ -81,9 +81,9 @@ public class EditContactActivity extends AppCompatActivity {
 
         add_contact = findViewById(R.id.add_contact);
 
-        list = findViewById(R.id.list);
+        /*list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);*/
 
         db = new ContactsDbAdapter(this);
         db.open();
@@ -107,8 +107,8 @@ public class EditContactActivity extends AppCompatActivity {
 
                     long id = getIntent().getLongExtra("id",18);
 
-                    listContacts.add(0, name.getText().toString());
-                    listContacts.add(1,firstname.getText().toString());
+                    //listContacts.add(0, name.getText().toString());
+                    //listContacts.add(1,firstname.getText().toString());
                     db.updateContact(id,name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
                     firstname.setText("");
                     name.setText("");
