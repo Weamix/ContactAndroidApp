@@ -41,7 +41,7 @@ public class ShowContactActivity extends AppCompatActivity {
 
         // Get  the contact by idw from the database and create the item list
 
-        long id = getIntent().getLongExtra("id",38);
+         long id = getIntent().getLongExtra("id",38);
 
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
@@ -138,8 +138,10 @@ public class ShowContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
 
+                long id = getIntent().getLongExtra("id",38);
+
                 Bundle b = new Bundle();
-                b.putString("id", id); //Your id
+                b.putLong("id", id); //Your id
                 i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
                 finish();

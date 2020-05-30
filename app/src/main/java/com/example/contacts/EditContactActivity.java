@@ -41,7 +41,7 @@ public class EditContactActivity extends AppCompatActivity {
 
         // Get  the contact by idw from the database and create the item list
 
-        long id = getIntent().getLongExtra("id",38);
+        long id = getIntent().getLongExtra("id",18);
 
         Cursor c = db.fetchContact(id);
         startManagingCursor(c);
