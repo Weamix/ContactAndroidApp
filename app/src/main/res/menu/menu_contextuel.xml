@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/call"
+    android:title="Appeler" >
+
+    </item>
+
+    <item android:id="@+id/message"
+        android:title="Envoyer un message" >
+
+    </item>
+
+    <item android:id="@+id/button"
+        android:title="Editer" >
+    </item>
+
+    <item android:id="@+id/mail"
+        android:title="Envoyer un mail" >
+
+    </item>
+
+    <item android:id="@+id/localize"
+        android:title="Localiser" >
+
+    </item>
+
     <item android:id="@+id/delete_contact"
-        android:title="Supprimer le contact" >
+    android:title="Supprimer le contact" >
 
     </item>
 </menu>

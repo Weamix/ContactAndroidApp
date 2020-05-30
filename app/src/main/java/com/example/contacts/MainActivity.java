@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> aa;
     public static ListView list;
     private ContactsDbAdapter db;
+    public String firstnameTxt;
+    public String lastnameTxt;
+    public String phoneTxt;
+    public String emailTxt;
+    public String addressTxt;
 
     //public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
@@ -41,6 +47,23 @@ public class MainActivity extends AppCompatActivity {
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
+
+        long id = getIntent().getLongExtra("id",38);
+
+        Cursor c2 = db.fetchContact(id);
+        startManagingCursor(c2);
+
+        if(c2.moveToFirst()){
+            do{
+                firstnameTxt = c2.getString(c2.getColumnIndex("firstname"));
+                lastnameTxt = c2.getString(c2.getColumnIndex("name"));
+                phoneTxt = c2.getString(c2.getColumnIndex("phone"));
+                emailTxt = c2.getString(c2.getColumnIndex("email"));
+                addressTxt = c2.getString(c2.getColumnIndex("address"));
+
+            }while (c2.moveToNext());
+        }
+        c2.close();
     }
 
     @Override
@@ -98,6 +121,39 @@ public class MainActivity extends AppCompatActivity {
         final long SelectedTask = SelectedTaskCursor.getLong(SelectedTaskCursor.getColumnIndex("_id"));
 
         switch (item.getItemId()) {
+            case R.id.call :
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" +phoneTxt));
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+                return true;
+
+            case R.id.message :
+                Uri uri = Uri.parse("smsto:"+phoneTxt);
+                Intent intentMessage = new Intent(Intent.ACTION_SENDTO, uri);
+                intentMessage.putExtra("sms_body", "");
+                startActivity(intentMessage);
+                return true;
+
+            case R.id.localize :
+                Uri location = Uri.parse("geo:0,0?q="+addressTxt);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+                startActivity(mapIntent);
+                return true;
+
+            case R.id.button:
+                Intent i = new Intent(MainActivity.this, EditContactActivity.class);
+
+                long id = getIntent().getLongExtra("id",38);
+
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
+                startActivity(i);
+                finish();
+                return true;
+
             case R.id.delete_contact :
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
@@ -115,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
                 // Create the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog = builder.show();
-
             default:
                 return super.onContextItemSelected(item);
         }
