@@ -172,7 +172,10 @@ public class ShowContactActivity extends AppCompatActivity {
                 // Add the buttons
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        db.deleteContact(id);
+                        Intent intent = new Intent(ShowContactActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        long id1 = getIntent().getLongExtra("id",38);
+                        db.deleteContact(id1);
                         fillData();
                     }
                 });
