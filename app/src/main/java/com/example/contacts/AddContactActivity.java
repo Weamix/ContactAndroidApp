@@ -2,11 +2,9 @@ package com.example.contacts;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -56,8 +54,6 @@ public class AddContactActivity extends AppCompatActivity {
                 // On teste si les champs nom,prenom ou le téléphone sont biens remplis (non vides)
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
-                    //AlertDialog.Builder builder = new AlertDialog.Builder(this.);
-                    //builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
                     builder.setMessage(R.string.dialog_infos).setTitle(R.string.infos);
 
@@ -65,9 +61,6 @@ public class AddContactActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                         }
                     });
-                    // Create the AlertDialog
-                    AlertDialog dialog = builder.create();
-                    dialog = builder.show();
                 }else {
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());

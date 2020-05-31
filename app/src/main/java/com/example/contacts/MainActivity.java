@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -34,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     public String phoneTxt;
     public String emailTxt;
     public String addressTxt;
-
-    //public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private void fillData() {
         // Get all of the contacts from the database and create the item list
@@ -144,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.edit:
                 Intent i = new Intent(MainActivity.this, EditContactActivity.class);
 
-                //long id = getIntent().getLongExtra("id",38);
-
                 Bundle b = new Bundle();
                 b.putLong("id", SelectedTask); //Your id
                 i.putExtras(b); //Put your id to your next Intent
@@ -173,9 +168,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
-                // Create the AlertDialog
-                AlertDialog dialog = builder.create();
-                dialog = builder.show();
 
             default:
                 return super.onContextItemSelected(item);

@@ -6,24 +6,17 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
 
 public class ShowContactActivity extends AppCompatActivity {
 
     public static TextView name;
     private ContactsDbAdapter db;
-    private static ArrayList<String> listContacts;
-    private ArrayAdapter<String> aa;
-    public static ListView list;
     public static ImageView call;
     public static ImageView localize;
     public static ImageView message;
@@ -75,10 +68,6 @@ public class ShowContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_contact);
 
-        /*Intent i = getIntent();
-        final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        list = findViewById(R.id.list);*/
         localize = findViewById(R.id.localize);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
@@ -88,9 +77,6 @@ public class ShowContactActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         delete = findViewById(R.id.delete);
 
-
-        /*listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.activity_list_item, listContacts);*/
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
@@ -98,8 +84,6 @@ public class ShowContactActivity extends AppCompatActivity {
         localize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*db.open();
-                fillData();*/
                 Uri location = Uri.parse("geo:0,0?q="+addressTxt);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
@@ -120,8 +104,6 @@ public class ShowContactActivity extends AppCompatActivity {
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-
                 Uri uri = Uri.parse("smsto:"+phoneTxt);
                 Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                 intent.putExtra("sms_body", "");
@@ -183,9 +165,6 @@ public class ShowContactActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
-                // Create the AlertDialog
-                AlertDialog dialog = builder.create();
-                dialog = builder.show();
             }
         });
 

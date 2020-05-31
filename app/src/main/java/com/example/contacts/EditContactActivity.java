@@ -22,9 +22,6 @@ public class EditContactActivity extends AppCompatActivity {
     public static EditText email;
     public static EditText address;
     public static Button add_contact;
-    public static ListView list;
-    private static ArrayList<String> listContacts;
-    private ArrayAdapter<String> aa;
 
     public String firstnameEdit;
     public String lastnameEdit;
@@ -70,9 +67,6 @@ public class EditContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
 
-        //Intent i = getIntent();
-        //final String id = i.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
         name = findViewById(R.id.nameEdit);
         firstname = findViewById(R.id.firstnameEdit);
         phone = findViewById(R.id.phoneEdit);
@@ -80,10 +74,6 @@ public class EditContactActivity extends AppCompatActivity {
         address = findViewById(R.id.addressEdit);
 
         add_contact = findViewById(R.id.add_contact);
-
-        /*list = findViewById(R.id.list);
-        listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);*/
 
         db = new ContactsDbAdapter(this);
         db.open();
@@ -101,14 +91,8 @@ public class EditContactActivity extends AppCompatActivity {
                 // On teste si les champs nom,prenom ou le téléphone sont biens remplis (non vides)
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
-                    //AlertDialog.Builder builder = new AlertDialog.Builder(this.);
-                    //builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
                 }else {
-
                     long id = getIntent().getLongExtra("id",18);
-
-                    //listContacts.add(0, name.getText().toString());
-                    //listContacts.add(1,firstname.getText().toString());
                     db.updateContact(id,name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
                     firstname.setText("");
                     name.setText("");
