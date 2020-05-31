@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.call :
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" +R.id.phoneTxt));
+                intent.setData(Uri.parse("tel:" +phoneTxt));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }
@@ -153,6 +153,12 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
 
+            case R.id.mail :
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",emailTxt, null));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
+                startActivity(Intent.createChooser(emailIntent, ""));
+                return true;
+
             case R.id.delete_contact :
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
@@ -170,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 // Create the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog = builder.show();
+
             default:
                 return super.onContextItemSelected(item);
         }
