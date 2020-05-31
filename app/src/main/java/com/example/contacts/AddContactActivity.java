@@ -2,12 +2,17 @@ package com.example.contacts;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -64,8 +69,38 @@ public class AddContactActivity extends AppCompatActivity {
                 // On teste si les champs nom,prenom ou le téléphone sont biens remplis (non vides)
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
+                    firstname.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    name.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    phone.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+
+                    if(phone.getText().toString().length() > 0){
+                        phone.getBackground().clearColorFilter();
+                    }
+                    if(name.getText().toString().length() > 0){
+                        name.getBackground().clearColorFilter();
+                    }
+                    if(firstname.getText().toString().length() > 0){
+                        firstname.getBackground().clearColorFilter();
+                    }
+
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
+                    builder.setMessage(R.string.dialog_infos).setTitle(R.string.infos);*/
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
-                    builder.setMessage(R.string.dialog_infos).setTitle(R.string.infos);
+                    TextView textView = new TextView(AddContactActivity.this);
+                    textView.setTextSize(15);
+                    textView.setGravity(Gravity.CENTER_HORIZONTAL);
+                    textView.setText("Veuillez remplir les champs manquants : \n");
+                    if(name.getText().toString().equals("")){
+                        textView.append("\nPrénom ");
+                    }
+                    if(firstname.getText().toString().equals("")){
+                        textView.append("\nNom ");
+                    }
+                    if(phone.getText().toString().equals("")){
+                        textView.append("\nNuméro de télèphone");
+                    }
+                    builder.setCustomTitle(textView);
 
                     builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -75,6 +110,10 @@ public class AddContactActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog = builder.show();
                 }else {
+                    firstname.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+                    name.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+                    phone.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+
                     //listContacts.add(0, name.getText().toString());
                     //listContacts.add(1,firstname.getText().toString());
                     db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
