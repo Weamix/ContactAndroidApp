@@ -1,5 +1,6 @@
 package com.example.contacts;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -56,6 +58,16 @@ public class AddContactActivity extends AppCompatActivity {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
                     //AlertDialog.Builder builder = new AlertDialog.Builder(this.);
                     //builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
+                    builder.setMessage(R.string.dialog_infos).setTitle(R.string.infos);
+
+                    builder.setNegativeButton(R.string.close, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog = builder.show();
                 }else {
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());

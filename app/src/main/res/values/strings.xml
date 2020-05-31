@@ -6,4 +6,7 @@
     <string name="dialog_title">ATTENTION</string>
     <string name="ok">Oui</string>
     <string name="cancel">Non</string>
+    <string name="infos">Informations</string>
+    <string name="dialog_infos">Veuillez remplir le(s) champ(s) manquant(s)</string>
+    <string name="close">Fermer</string>
 </resources>
