@@ -141,13 +141,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(mapIntent);
                 return true;
 
-            case R.id.button:
+            case R.id.edit:
                 Intent i = new Intent(MainActivity.this, EditContactActivity.class);
 
-                long id = getIntent().getLongExtra("id",38);
+                //long id = getIntent().getLongExtra("id",38);
 
                 Bundle b = new Bundle();
-                b.putLong("id", id); //Your id
+                b.putLong("id", SelectedTask); //Your id
                 i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
                 finish();
