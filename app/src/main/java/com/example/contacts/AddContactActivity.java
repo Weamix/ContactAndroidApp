@@ -83,14 +83,11 @@ public class AddContactActivity extends AppCompatActivity {
                         firstname.getBackground().clearColorFilter();
                     }
 
-                    /*AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
-                    builder.setMessage(R.string.dialog_infos).setTitle(R.string.infos);*/
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(AddContactActivity.this);
                     TextView textView = new TextView(AddContactActivity.this);
                     textView.setTextSize(15);
                     textView.setGravity(Gravity.CENTER_HORIZONTAL);
-                    textView.setText("Veuillez remplir les champs manquants : \n");
+                    textView.setText("\nVeuillez remplir les champs manquants : \n");
                     if(name.getText().toString().equals("")){
                         textView.append("\nPrénom ");
                     }
