@@ -1,11 +1,13 @@
 package com.example.contacts;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,8 @@ public class AddContactActivity extends AppCompatActivity {
     public static EditText phone;
     public static EditText email;
     public static EditText address;
-    public static Button add_contact;
+    public static ImageView add_contact;
+    public static ImageView back;
     public static ListView list;
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
@@ -37,6 +40,7 @@ public class AddContactActivity extends AppCompatActivity {
         address = findViewById(R.id.address);
 
         add_contact = findViewById(R.id.add_contact);
+        back = findViewById(R.id.back2);
 
         list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
@@ -65,6 +69,14 @@ public class AddContactActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 add_contact.setEnabled(true);
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddContactActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
