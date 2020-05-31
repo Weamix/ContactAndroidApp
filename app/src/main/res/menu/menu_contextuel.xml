@@ -10,7 +10,7 @@
 
     </item>
 
-    <item android:id="@+id/edit"
+    <item android:id="@+id/button"
         android:title="Editer" >
     </item>
 
