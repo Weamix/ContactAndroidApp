@@ -8,21 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
+/*
+ * @author VITSE Maxime
+ * @author DJAMAA Wassim
+ */
+
 public class AddContactActivity extends AppCompatActivity {
+
     private ContactsDbAdapter db;
+
     public static EditText name;
     public static EditText firstname;
     public static EditText phone;
     public static EditText email;
     public static EditText address;
+
     public static ImageView add_contact;
     public static ImageView back;
+
     public static ListView list;
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
@@ -42,12 +49,15 @@ public class AddContactActivity extends AppCompatActivity {
         add_contact = findViewById(R.id.add_contact);
         back = findViewById(R.id.back2);
 
-        list = findViewById(R.id.list);
+        /*list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
-        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);
+        aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listContacts);*/
+
+        // Db connection
         db = new ContactsDbAdapter(this);
         db.open();
 
+        // Creating a contact
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,14 +75,14 @@ public class AddContactActivity extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog = builder.show();
                 }else {
-                    listContacts.add(0, name.getText().toString());
-                    listContacts.add(1,firstname.getText().toString());
+                    //listContacts.add(0, name.getText().toString());
+                    //listContacts.add(1,firstname.getText().toString());
                     db.createContact(name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
-                    name.setText("");
+                    /*name.setText("");
                     firstname.setText("");
                     phone.setText("");
                     email.setText("");
-                    address.setText("");
+                    address.setText("");*/
                     Intent i = new Intent(AddContactActivity.this, MainActivity.class);
                     startActivity(i);
                 }
@@ -80,6 +90,7 @@ public class AddContactActivity extends AppCompatActivity {
             }
         });
 
+        // Back to the previous intent
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+/*
+ * @author VITSE Maxime
+ * @author DJAMAA Wassim
+ */
 
 public class EditContactActivity extends AppCompatActivity {
     private ContactsDbAdapter db;
@@ -94,11 +94,11 @@ public class EditContactActivity extends AppCompatActivity {
                 }else {
                     long id = getIntent().getLongExtra("id",18);
                     db.updateContact(id,name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
-                    firstname.setText("");
+                    /*firstname.setText("");
                     name.setText("");
                     phone.setText("");
                     email.setText("");
-                    address.setText("");
+                    address.setText("");*/
                     Intent i = new Intent(EditContactActivity.this, MainActivity.class);
                     startActivity(i);
                 }

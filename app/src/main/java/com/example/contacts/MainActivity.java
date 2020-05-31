@@ -2,7 +2,6 @@ package com.example.contacts;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,26 +12,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-
 import java.util.ArrayList;
 
+/*
+* @author VITSE Maxime
+* @author DJAMAA Wassim
+ */
 
 public class MainActivity extends AppCompatActivity {
-    public static ImageView add;
+
+    private ContactsDbAdapter db;
+
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
-    private ContactsDbAdapter db;
+
     public String firstnameTxt;
     public String lastnameTxt;
     public String phoneTxt;
     public String emailTxt;
     public String addressTxt;
+
+    public static ImageView add;
 
     private void fillData() {
         // Get all of the contacts from the database and create the item list
@@ -54,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
 
         add = findViewById(R.id.add);
         list = findViewById(R.id.list);
-
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
 
+        // Db connection
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
 
+        // Intent add contact
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,23 +76,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Intent display informations of a specific contact
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
-
                 Bundle b = new Bundle();
                 b.putLong("id", id); //Your id
                 i.putExtras(b); //Put your id to your next Intent
                 startActivity(i);
                 finish();
-
             }
         });
 
         registerForContextMenu(list);
     }
 
+    // Create Menu contextual
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
@@ -117,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         c2.close();
 
         switch (item.getItemId()) {
+            // Menu contextual : Call
             case R.id.call :
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:" +phoneTxt));
@@ -125,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
 
+            // Menu contextual : Message
             case R.id.message :
                 Uri uri = Uri.parse("smsto:"+phoneTxt);
                 Intent intentMessage = new Intent(Intent.ACTION_SENDTO, uri);
@@ -132,12 +140,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentMessage);
                 return true;
 
+            // Menu contextual : GoogleMaps
             case R.id.localize :
                 Uri location = Uri.parse("geo:0,0?q="+addressTxt);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
                 startActivity(mapIntent);
                 return true;
 
+            // Menu contextual : Mail
+            case R.id.mail :
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",emailTxt, null));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
+                startActivity(Intent.createChooser(emailIntent, ""));
+                return true;
+
+            // Menu contextual : Editing contact
             case R.id.edit:
                 Intent i = new Intent(MainActivity.this, EditContactActivity.class);
 
@@ -148,16 +165,11 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 return true;
 
-            case R.id.mail :
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",emailTxt, null));
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, emailTxt);
-                startActivity(Intent.createChooser(emailIntent, ""));
-                return true;
-
+            // Menu contextual : Deleting contact
             case R.id.delete_contact :
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-                // Add the buttons
+                // Add the buttons on the AlertDialog
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         db.deleteContact(SelectedTask);

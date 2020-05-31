@@ -8,27 +8,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+/*
+ * @author VITSE Maxime
+ * @author DJAMAA Wassim
+ */
 
 public class ShowContactActivity extends AppCompatActivity {
 
-    public static TextView name;
     private ContactsDbAdapter db;
+
+    public static TextView name;
+
+    public static ImageView edit;
+    public static ImageView back;
+    public static ImageView delete;
+
     public static ImageView call;
     public static ImageView localize;
     public static ImageView message;
     public static ImageView mail;
+
     public String firstnameTxt;
     public String lastnameTxt;
     public String phoneTxt;
     public String emailTxt;
     public String addressTxt;
-    public static ImageView edit;
-    public static ImageView back;
-    public static ImageView delete;
 
     private void fillData() {
         final TextView firstname = findViewById(R.id.firstnameTxt);
@@ -37,7 +44,7 @@ public class ShowContactActivity extends AppCompatActivity {
         final TextView email = findViewById(R.id.emailTxt);
         final TextView address = findViewById(R.id.addressTxt);
 
-        // Get  the contact by idw from the database and create the item list
+        // Get  the contact by id from the database and create the item list
 
          long id = getIntent().getLongExtra("id",38);
 
@@ -77,10 +84,12 @@ public class ShowContactActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         delete = findViewById(R.id.delete);
 
+        // Db connection
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
 
+        // Google Maps
         localize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +99,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
+        // Call
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +111,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
+        // Message
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +123,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
+        // Mail
         mail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,21 +134,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
-
-                long id = getIntent().getLongExtra("id",38);
-
-                Bundle b = new Bundle();
-                b.putLong("id", id); //Your id
-                i.putExtras(b); //Put your id to your next Intent
-                startActivity(i);
-                finish();
-            }
-        });
-
+        // Back to the previous intent
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +143,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
-
+        // Deleting contact
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +166,22 @@ public class ShowContactActivity extends AppCompatActivity {
                 // Create the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog = builder.show();
+            }
+        });
+
+        // Updating a contact
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
+
+                long id = getIntent().getLongExtra("id",38);
+
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
+                startActivity(i);
+                finish();
             }
         });
 
