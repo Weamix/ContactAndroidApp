@@ -7,126 +7,149 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/firstnameTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="44dp"
-        android:text="firstname"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:layout_marginBottom="182dp"
-        android:text="EDITER"
+    <ImageView
+        android:id="@+id/localize"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/message"
+        app:layout_constraintStart_toStartOf="@+id/message"
+        app:layout_constraintTop_toBottomOf="@+id/mail"
+        app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
-    <TextView
-        android:id="@+id/emailTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="66dp"
-        android:text="email"
-        android:textSize="18sp"
+    <ImageView
+        android:id="@+id/message"
+        android:layout_width="75dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/mail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_action_chat" />
+
+    <ImageView
+        android:id="@+id/call"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneTxt" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_action_call" />
 
     <TextView
         android:id="@+id/phoneTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="124dp"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
         android:text="phone"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/addressTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_width="225dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="61dp"
         android:text="address"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/emailTxt"
-        app:layout_constraintTop_toBottomOf="@+id/emailTxt" />
-
-    <Button
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:text="Message"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/localize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
-        android:layout_marginBottom="16dp"
-        android:text="Localiser"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="95dp"
-        android:layout_marginLeft="95dp"
-        android:layout_marginBottom="16dp"
-        android:text="Mail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Appeler"
-        app:layout_constraintBaseline_toBaselineOf="@+id/message"
-        app:layout_constraintStart_toStartOf="@+id/name" />
+        app:layout_constraintEnd_toStartOf="@+id/localize" />
 
     <TextView
         android:id="@+id/lastnameTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginRight="62dp"
+        android:layout_width="163dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
         android:text="lastname"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/phoneTxt"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/firstnameTxt"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/firstnameTxt"
+        android:layout_width="156dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="192dp"
+        android:text="firstname"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
+        android:id="@+id/mail"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="126dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="@+id/addressTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/phoneTxt"
+        app:srcCompat="@android:drawable/sym_action_email" />
+
+    <TextView
+        android:id="@+id/emailTxt"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:text="email"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mail"
+        app:layout_constraintEnd_toStartOf="@+id/mail"
+        app:layout_constraintStart_toStartOf="@+id/addressTxt"
+        app:layout_constraintTop_toTopOf="@+id/mail" />
+
+    <ImageView
+        android:id="@+id/edit"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/back"
+        app:layout_constraintVertical_bias="0.263"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageView
         android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginBottom="35dp"
-        android:text="Retour"
-        app:layout_constraintBottom_toTopOf="@+id/call"
-        app:layout_constraintEnd_toEndOf="@+id/call" />
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toTopOf="@+id/firstnameTxt"
+        app:layout_constraintEnd_toStartOf="@+id/edit"
+        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.259"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        app:layout_constraintBottom_toTopOf="@+id/phoneTxt"
+        app:layout_constraintEnd_toStartOf="@+id/edit"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toEndOf="@+id/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

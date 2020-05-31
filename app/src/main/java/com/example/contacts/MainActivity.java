@@ -47,23 +47,6 @@ public class MainActivity extends AppCompatActivity {
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
-
-        long id = getIntent().getLongExtra("id",38);
-
-        Cursor c2 = db.fetchContact(id);
-        startManagingCursor(c2);
-
-        if(c2.moveToFirst()){
-            do{
-                firstnameTxt = c2.getString(c2.getColumnIndex("firstname"));
-                lastnameTxt = c2.getString(c2.getColumnIndex("name"));
-                phoneTxt = c2.getString(c2.getColumnIndex("phone"));
-                emailTxt = c2.getString(c2.getColumnIndex("email"));
-                addressTxt = c2.getString(c2.getColumnIndex("address"));
-
-            }while (c2.moveToNext());
-        }
-        c2.close();
     }
 
     @Override
@@ -120,10 +103,25 @@ public class MainActivity extends AppCompatActivity {
         Cursor SelectedTaskCursor = (Cursor) list.getItemAtPosition(info.position);
         final long SelectedTask = SelectedTaskCursor.getLong(SelectedTaskCursor.getColumnIndex("_id"));
 
+        Cursor c2 = db.fetchContact(SelectedTask);
+        startManagingCursor(c2);
+
+        if(c2.moveToFirst()){
+            do{
+                firstnameTxt = c2.getString(c2.getColumnIndex("firstname"));
+                lastnameTxt = c2.getString(c2.getColumnIndex("name"));
+                phoneTxt = c2.getString(c2.getColumnIndex("phone"));
+                emailTxt = c2.getString(c2.getColumnIndex("email"));
+                addressTxt = c2.getString(c2.getColumnIndex("address"));
+
+            }while (c2.moveToNext());
+        }
+        c2.close();
+
         switch (item.getItemId()) {
             case R.id.call :
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" +phoneTxt));
+                intent.setData(Uri.parse("tel:" +R.id.phoneTxt));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,17 +22,17 @@ public class ShowContactActivity extends AppCompatActivity {
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
-    public static Button call;
-    public static Button localize;
-    public static Button message;
-    public static Button mail;
+    public static ImageView call;
+    public static ImageView localize;
+    public static ImageView message;
+    public static ImageView mail;
     public String firstnameTxt;
     public String lastnameTxt;
     public String phoneTxt;
     public String emailTxt;
     public String addressTxt;
-    public static Button button;
-    public static Button buttonBack;
+    public static ImageView edit;
+    public static ImageView back;
 
     private void fillData() {
         final TextView firstname = findViewById(R.id.firstnameTxt);
@@ -78,9 +79,10 @@ public class ShowContactActivity extends AppCompatActivity {
         localize = findViewById(R.id.localize);
         call = findViewById(R.id.call);
         message = findViewById(R.id.message);
-        mail = findViewById(R.id.name);
+        mail = findViewById(R.id.mail);
 
-        button = findViewById(R.id.button);
+        edit = findViewById(R.id.edit);
+        back = findViewById(R.id.back);
 
 
         /*listContacts = new ArrayList<String>() ;
@@ -134,7 +136,7 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ShowContactActivity.this, EditContactActivity.class);
@@ -149,12 +151,11 @@ public class ShowContactActivity extends AppCompatActivity {
             }
         });
 
-        buttonBack = (Button) findViewById(R.id.back);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentRetour = new Intent(ShowContactActivity.this, MainActivity.class);
-                startActivity(intentRetour);
+                Intent intent = new Intent(ShowContactActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
