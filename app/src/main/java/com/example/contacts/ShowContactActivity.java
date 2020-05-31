@@ -1,5 +1,6 @@
 package com.example.contacts;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ public class ShowContactActivity extends AppCompatActivity {
     public String addressTxt;
     public static ImageView edit;
     public static ImageView back;
+    public static ImageView delete;
 
     private void fillData() {
         final TextView firstname = findViewById(R.id.firstnameTxt);
@@ -83,6 +86,7 @@ public class ShowContactActivity extends AppCompatActivity {
 
         edit = findViewById(R.id.edit);
         back = findViewById(R.id.back);
+        delete = findViewById(R.id.delete);
 
 
         /*listContacts = new ArrayList<String>() ;
@@ -158,5 +162,29 @@ public class ShowContactActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ShowContactActivity.this);
+                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+                // Add the buttons
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        db.deleteContact(id);
+                        fillData();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+                // Create the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog = builder.show();
+            }
+        });
+
     }
 }
