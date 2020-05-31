@@ -165,6 +165,9 @@ public class ShowContactActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
+                // Create the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog = builder.show();
             }
         });
 

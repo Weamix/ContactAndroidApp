@@ -168,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
+                // Create the AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog = builder.show();
 
             default:
                 return super.onContextItemSelected(item);

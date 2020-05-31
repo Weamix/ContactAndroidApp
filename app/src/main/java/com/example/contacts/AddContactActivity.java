@@ -61,6 +61,9 @@ public class AddContactActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int id) {
                         }
                     });
+                    // Create the AlertDialog
+                    AlertDialog dialog = builder.create();
+                    dialog = builder.show();
                 }else {
                     listContacts.add(0, name.getText().toString());
                     listContacts.add(1,firstname.getText().toString());
