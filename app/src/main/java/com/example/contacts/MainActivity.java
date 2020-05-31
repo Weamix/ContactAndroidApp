@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static Button button;
+    public static ImageView add;
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button3);
+        add = findViewById(R.id.add);
         list = findViewById(R.id.list);
 
         listContacts = new ArrayList<String>() ;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         db.open();
         fillData();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, AddContactActivity.class);
