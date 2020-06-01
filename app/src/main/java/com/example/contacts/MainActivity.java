@@ -25,8 +25,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Database
     private ContactsDbAdapter db;
 
+    // Elements of the page
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static ImageView add;
 
+    // Get all of the contacts from the database and create the item list
     private void fillData() {
-        // Get all of the contacts from the database and create the item list
         Cursor c = db.fetchAllContacts();
         startManagingCursor(c);
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor SelectedTaskCursor = (Cursor) list.getItemAtPosition(info.position);
         final long SelectedTask = SelectedTaskCursor.getLong(SelectedTaskCursor.getColumnIndex("_id"));
 
+        // Get data from a contact with the id
         Cursor c2 = db.fetchContact(SelectedTask);
         startManagingCursor(c2);
 
