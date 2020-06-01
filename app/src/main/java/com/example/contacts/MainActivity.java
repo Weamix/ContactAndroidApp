@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     public static ListView list;
     public static ListView favs;
 
+    // Variables link to the c2 cursor to display data of one contact by id
     public String firstnameTxt;
     public String lastnameTxt;
     public String phoneTxt;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor SelectedTaskCursor = (Cursor) list.getItemAtPosition(info.position);
         final long SelectedTask = SelectedTaskCursor.getLong(SelectedTaskCursor.getColumnIndex("_id"));
 
-        // Get data from a contact with the id
+        // Get the data of a contact by id
         Cursor c2 = db.fetchContact(SelectedTask);
         startManagingCursor(c2);
 

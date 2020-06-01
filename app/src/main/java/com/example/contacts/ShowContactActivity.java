@@ -18,19 +18,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ShowContactActivity extends AppCompatActivity {
 
+    // Database
     private ContactsDbAdapter db;
 
-    public static TextView name;
-
+    // Elements of the page
     public static ImageView edit;
     public static ImageView back;
     public static ImageView delete;
-
     public static ImageView call;
     public static ImageView localize;
     public static ImageView message;
     public static ImageView mail;
 
+    // Variables link to the cursor to display data of one contact by id
     public String firstnameTxt;
     public String lastnameTxt;
     public String phoneTxt;
@@ -44,7 +44,7 @@ public class ShowContactActivity extends AppCompatActivity {
         final TextView email = findViewById(R.id.emailTxt);
         final TextView address = findViewById(R.id.addressTxt);
 
-        // Get  the contact by id from the database and create the item list
+        // Get the data of a contact by id
 
          long id = getIntent().getLongExtra("id",38);
 

@@ -15,7 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 
 public class EditContactActivity extends AppCompatActivity {
+
+    // Database
     private ContactsDbAdapter db;
+
+    // Elements of the page
     public static EditText name;
     public static EditText firstname;
     public static EditText phone;
@@ -23,6 +27,7 @@ public class EditContactActivity extends AppCompatActivity {
     public static EditText address;
     public static Button add_contact;
 
+    // Variables link to the cursor to display data of one contact by id
     public String firstnameEdit;
     public String lastnameEdit;
     public String phoneEdit;
@@ -75,30 +80,28 @@ public class EditContactActivity extends AppCompatActivity {
 
         add_contact = findViewById(R.id.add_contact);
 
+        // Db connection
         db = new ContactsDbAdapter(this);
         db.open();
         fillData();
 
+        // Set data of the contact in each EditText
         name.setText(lastnameEdit);
         firstname.setText(firstnameEdit);
         phone.setText(phoneEdit);
         email.setText(emailEdit);
         address.setText(addressEdit);
 
+        // Updating a contact by id
         add_contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // On teste si les champs nom,prenom ou le téléphone sont biens remplis (non vides)
+                // Checking if firstname, lastname and number are NOT empty
                 if(name.getText().toString().equals("") || firstname.getText().toString().equals("") || phone.getText().toString().equals("")) {
                     add_contact.setEnabled(false); // bloque le bouton "Enregistrer"
                 }else {
                     long id = getIntent().getLongExtra("id",18);
                     db.updateContact(id,name.getText().toString(),firstname.getText().toString(),phone.getText().toString(),email.getText().toString(),address.getText().toString());
-                    /*firstname.setText("");
-                    name.setText("");
-                    phone.setText("");
-                    email.setText("");
-                    address.setText("");*/
                     Intent i = new Intent(EditContactActivity.this, MainActivity.class);
                     startActivity(i);
                 }
