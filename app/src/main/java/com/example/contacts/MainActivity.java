@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
+        favs.setAdapter(contacts);
     }
 
     @Override
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         list = findViewById(R.id.list);
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
+        favs = findViewById(R.id.favs);
 
         // Db connection
         db = new ContactsDbAdapter(this);
@@ -94,6 +96,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(list);
+
+        favs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MainActivity.this, ShowContactActivity.class);
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
+                startActivity(i);
+                finish();
+            }
+        });
+
+        registerForContextMenu(favs);
     }
 
     // Create Menu contextual
