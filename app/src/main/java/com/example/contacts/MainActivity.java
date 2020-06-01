@@ -18,9 +18,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import java.util.ArrayList;
 
-/*
-* @author VITSE Maxime
-* @author DJAMAA Wassim
+/**
+ * @author VITSE Maxime
+ *  @author DJAMAA Wassim
  */
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static ArrayList<String> listContacts;
     private ArrayAdapter<String> aa;
     public static ListView list;
+    public static ListView favs;
 
     public String firstnameTxt;
     public String lastnameTxt;

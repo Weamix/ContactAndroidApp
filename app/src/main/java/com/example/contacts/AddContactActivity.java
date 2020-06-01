@@ -17,9 +17,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
-/*
+/**
  * @author VITSE Maxime
- * @author DJAMAA Wassim
+ *  @author DJAMAA Wassim
  */
 
 public class AddContactActivity extends AppCompatActivity {

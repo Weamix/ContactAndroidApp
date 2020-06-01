@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-/*
+/**
  * @author VITSE Maxime
  * @author DJAMAA Wassim
  */
