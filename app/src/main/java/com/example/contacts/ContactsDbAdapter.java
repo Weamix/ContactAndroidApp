@@ -26,6 +26,7 @@ public class ContactsDbAdapter {
     public static final String KEY_PHONE = "phone";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_ADDRESS = "address";
+    public static final String KEY_FAV = "fav";
 
     private static final String TAG = "ContactsDbAdapter";
     private DatabaseHelper mDbHelper;
@@ -36,7 +37,12 @@ public class ContactsDbAdapter {
      */
     private static final String DATABASE_CREATE =
             "create table contacts (_id integer primary key autoincrement, "
-                    + "name text not null, firstname text not null,phone text not null, email text not null, address text not null );";
+                    +"name text not null,"
+                    +"firstname text not null,"
+                    +"phone text not null,"
+                    +"email text not null,"
+                    +"address text not null,"
+                    +"fav integer);";
 
     private static final String DATABASE_NAME = "data";
     private static final String DATABASE_TABLE = "contacts";
@@ -114,6 +120,7 @@ public class ContactsDbAdapter {
         initialValues.put(KEY_PHONE, phone);
         initialValues.put(KEY_EMAIL, email);
         initialValues.put(KEY_ADDRESS, address);
+        initialValues.put(KEY_FAV, 0);
 
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
@@ -135,15 +142,27 @@ public class ContactsDbAdapter {
     }
 
     /**
-     * Return a Cursor over the list of all contacts in the database
+     * Return a Cursor over the list of all not favorites contacts in the database
      *
-     * @return Cursor over all contacts
+     * @return Cursor over all not favorites contacts
      */
     public Cursor fetchAllContacts() {
 
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME,
-                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, null, null, null, null, KEY_NAME);
+                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, KEY_FAV + "=0" ,null, null, null, KEY_NAME);
     }
+
+    /**
+     * Return a Cursor over the list of all favorites contacts in the database
+     *
+     * @return Cursor over all favorites contacts
+     */
+    public Cursor fetchAllFavorites() {
+
+        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_NAME,
+                KEY_FIRSTNAME,KEY_PHONE,KEY_EMAIL,KEY_ADDRESS}, KEY_FAV + "<>0", null, null, null, KEY_NAME);
+    }
+
 
     /**
      * Return a Cursor positioned at the contact that matches the given rowId
@@ -185,6 +204,30 @@ public class ContactsDbAdapter {
         args.put(KEY_PHONE, phone);
         args.put(KEY_EMAIL, email);
         args.put(KEY_ADDRESS, address);
+
+        return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    /**
+     * Add the contact to favorite list. The contact to be updated is specified using the rowId
+     * @param rowId id of contact to update
+     * @return true if the contact was successfully updated, false otherwise
+     */
+    public boolean addFavorite(long rowId){
+        ContentValues args = new ContentValues();
+        args.put(KEY_FAV, 1);
+
+        return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
+    }
+
+    /**
+     * Delete the contact to favorite list. The contact to be updated is specified using the rowId
+     * @param rowId id of contact to update
+     * @return true if the contact was successfully updated, false otherwise
+     */
+    public boolean deleteFavorite(long rowId){
+        ContentValues args = new ContentValues();
+        args.put(KEY_FAV, 1);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
