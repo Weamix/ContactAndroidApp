@@ -54,6 +54,19 @@ public class MainActivity extends AppCompatActivity {
         // Now create an array adapter and set it to display using our row
         SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, c, from, to);
         list.setAdapter(contacts);
+
+        fillDataFavorite();
+    }
+
+    private void fillDataFavorite() {
+        Cursor cFav = db.fetchAllFavorites();
+        startManagingCursor(cFav);
+
+        String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME};
+        int[] to = new int[] { R.id.name,R.id.firstname};
+
+        // Now create an array adapter and set it to display using our row
+        SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, cFav, from, to);
         favs.setAdapter(contacts);
     }
 
@@ -95,8 +108,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        registerForContextMenu(list);
-
         favs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -109,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        registerForContextMenu(list);
         registerForContextMenu(favs);
     }
 
@@ -204,6 +216,17 @@ public class MainActivity extends AppCompatActivity {
                 // Create the AlertDialog
                 AlertDialog dialog = builder.create();
                 dialog = builder.show();
+                return true;
+
+            // Menu contextual : Add contact in favorite
+            case R.id.add_favorite:
+                db.addFavorite(SelectedTask);
+                fillData();
+                return true;
+
+            // Menu contextual : Delete contact in favorite
+            case R.id.delete_favorite:
+                db.deleteFavorite(SelectedTask);
 
             default:
                 return super.onContextItemSelected(item);
