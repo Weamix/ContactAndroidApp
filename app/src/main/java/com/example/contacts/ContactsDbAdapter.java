@@ -227,7 +227,7 @@ public class ContactsDbAdapter {
      */
     public boolean deleteFavorite(long rowId){
         ContentValues args = new ContentValues();
-        args.put(KEY_FAV, 1);
+        args.put(KEY_FAV, 0);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
