@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public String addressTxt;
 
     public static ImageView add;
+    public static ImageView scanQrCode;
 
     // Get all of the contacts from the database and create the item list
     private void fillData() {
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         listContacts = new ArrayList<String>() ;
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
         favs = findViewById(R.id.favs);
+        scanQrCode = findViewById(R.id.ScannQrCode);
 
         // Db connection
         db = new ContactsDbAdapter(this);
@@ -91,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, AddContactActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // Intent Scanner Qr Code
+        scanQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ScanQrCodeActivity.class);
                 startActivity(i);
             }
         });

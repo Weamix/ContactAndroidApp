@@ -48,7 +48,7 @@ public class QrCodeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 long id = getIntent().getLongExtra("id",38);
-                
+
                 Intent i = new Intent(QrCodeActivity.this, ShowContactActivity.class);
 
                 Bundle b = new Bundle();
