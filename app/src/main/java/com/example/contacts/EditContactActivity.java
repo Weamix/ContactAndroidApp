@@ -117,7 +117,6 @@ public class EditContactActivity extends AppCompatActivity {
             public void onClick(View v) {
                 long id = getIntent().getLongExtra("id",38);
                 Intent intent = new Intent(EditContactActivity.this, ShowContactActivity.class);
-                startActivity(intent);
                 Bundle b = new Bundle();
                 b.putLong("id", id); //Your id
                 intent.putExtras(b); //Put your id to your next Intent
