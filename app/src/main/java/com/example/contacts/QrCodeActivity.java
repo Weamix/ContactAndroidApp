@@ -14,7 +14,7 @@ import com.google.zxing.MultiFormatWriter;
 public class QrCodeActivity extends AppCompatActivity {
 
     Bitmap bitmap ;
-    public final static int QRcodeWidth = 400;
+    public final static int QRcodeWidth = 500;
     private static final int blue = 0xFFFFFFFF;
     private static final int white = 0xFF000000;
 
@@ -30,19 +30,12 @@ public class QrCodeActivity extends AppCompatActivity {
         // your Activity's XML layout file
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
 
-        //String qrData = "Data I want to encode in QR code";
-        //int qrCodeDimention = 400;
-
-        /*QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
-                Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);*/
-
         try {
             Bitmap bitmap = encodeAsBitmap(qrData);
             imageView.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -78,7 +71,7 @@ public class QrCodeActivity extends AppCompatActivity {
         }
         Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
 
-        bitmap.setPixels(pixels, 0, 350, 0, 0, bitMatrixWidth, bitMatrixHeight);
+        bitmap.setPixels(pixels, 0, QRcodeWidth, 0, 0, bitMatrixWidth, bitMatrixHeight);
         return bitmap;
     }
 
