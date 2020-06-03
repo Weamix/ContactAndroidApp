@@ -54,9 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static ImageView add;
     public static ImageView scanQrCode;
 
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final String ALLOW_KEY = "ALLOWED";
-    public static final String CAMERA_PREF = "camera_pref";
+    private static final int ZXING_CAMERA_PERMISSION = 1;;
 
     // Get all of the contacts from the database and create the item list
     private void fillData() {
@@ -97,29 +95,6 @@ public class MainActivity extends AppCompatActivity {
         favs = findViewById(R.id.favs);
         scanQrCode = findViewById(R.id.ScannQrCode);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            if (getFromPref(this, ALLOW_KEY)) {
-                showSettingsAlert();
-            } else if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.CAMERA)
-
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.CAMERA)) {
-                    showAlert();
-                } else {
-                    // No explanation needed, we can request the permission.
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.CAMERA},
-                            MY_PERMISSIONS_REQUEST_CAMERA);
-                }
-            }
-        } else {
-            //openCamera();
-        }
-
         // Db connection
         db = new ContactsDbAdapter(this);
         db.open();
@@ -138,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
         scanQrCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, ScanQrCodeActivity.class);
-                startActivity(i);
+                launchActivity(ScanQrCodeActivity.class);
             }
         });
 
@@ -283,67 +257,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void saveToPreferences(Context context, String key, Boolean allowed) {
-        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-        prefsEditor.putBoolean(key, allowed);
-        prefsEditor.commit();
-    }
+    // Permissions camera
 
-    public static Boolean getFromPref(Context context, String key) {
-        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
-                Context.MODE_PRIVATE);
-        return (myPrefs.getBoolean(key, false));
-    }
-
-    private void showAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        ActivityCompat.requestPermissions(MainActivity.this,
-                                new String[]{Manifest.permission.CAMERA},
-                                MY_PERMISSIONS_REQUEST_CAMERA);
-                    }
-                });
-        alertDialog.show();
-    }
-
-    private void showSettingsAlert() {
-        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("Alert");
-        alertDialog.setMessage("App needs to access the Camera.");
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
-                new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-        alertDialog.show();
+    public void launchActivity(Class<?> clss) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            Class<?> mClss = clss;
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, ZXING_CAMERA_PERMISSION);
+        } else {
+            Intent intent = new Intent(this, clss);
+            startActivity(intent);
+        }
     }
 }
