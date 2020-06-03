@@ -2,8 +2,13 @@ package com.example.contacts;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.view.ContextMenu;
@@ -16,6 +21,11 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+
 import java.util.ArrayList;
 
 /**
@@ -43,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static ImageView add;
     public static ImageView scanQrCode;
+
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
 
     // Get all of the contacts from the database and create the item list
     private void fillData() {
@@ -82,6 +96,29 @@ public class MainActivity extends AppCompatActivity {
         aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, listContacts);
         favs = findViewById(R.id.favs);
         scanQrCode = findViewById(R.id.ScannQrCode);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (getFromPref(this, ALLOW_KEY)) {
+                showSettingsAlert();
+            } else if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.CAMERA)
+
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.CAMERA)) {
+                    showAlert();
+                } else {
+                    // No explanation needed, we can request the permission.
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{Manifest.permission.CAMERA},
+                            MY_PERMISSIONS_REQUEST_CAMERA);
+                }
+            }
+        } else {
+            //openCamera();
+        }
 
         // Db connection
         db = new ContactsDbAdapter(this);
@@ -133,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerForContextMenu(list);
         registerForContextMenu(favs);
+
     }
 
     // Create Menu contextual
@@ -243,5 +281,69 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    public static void saveToPreferences(Context context, String key, Boolean allowed) {
+        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = myPrefs.edit();
+        prefsEditor.putBoolean(key, allowed);
+        prefsEditor.commit();
+    }
+
+    public static Boolean getFromPref(Context context, String key) {
+        SharedPreferences myPrefs = context.getSharedPreferences(CAMERA_PREF,
+                Context.MODE_PRIVATE);
+        return (myPrefs.getBoolean(key, false));
+    }
+
+    private void showAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("App needs to access the Camera.");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        ActivityCompat.requestPermissions(MainActivity.this,
+                                new String[]{Manifest.permission.CAMERA},
+                                MY_PERMISSIONS_REQUEST_CAMERA);
+                    }
+                });
+        alertDialog.show();
+    }
+
+    private void showSettingsAlert() {
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("App needs to access the Camera.");
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "DONT ALLOW",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "SETTINGS",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        alertDialog.show();
     }
 }

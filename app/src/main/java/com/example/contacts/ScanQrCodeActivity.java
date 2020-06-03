@@ -1,8 +1,5 @@
 package com.example.contacts;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,7 +38,7 @@ public class ScanQrCodeActivity extends Activity implements ZXingScannerView.Res
 
     @Override
     public void handleResult(Result rawResult) {
-        Log.v("tag", rawResult.getText()); // Prints scan results
+        //Log.v("tag", rawResult.getText()); // Prints scan results
         // Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         //MainActivity.tvresult.setText(rawResult.getText());
