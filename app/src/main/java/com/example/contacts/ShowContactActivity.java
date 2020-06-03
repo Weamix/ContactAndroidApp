@@ -29,6 +29,7 @@ public class ShowContactActivity extends AppCompatActivity {
     public static ImageView localize;
     public static ImageView message;
     public static ImageView mail;
+    public static ImageView qrcode;
 
     // Variables link to the cursor to display data of one contact by id
     public String firstnameTxt;
@@ -83,6 +84,7 @@ public class ShowContactActivity extends AppCompatActivity {
         edit = findViewById(R.id.edit);
         back = findViewById(R.id.back);
         delete = findViewById(R.id.delete);
+        qrcode =  findViewById(R.id.qrcode);
 
         // Db connection
         db = new ContactsDbAdapter(this);
@@ -180,6 +182,24 @@ public class ShowContactActivity extends AppCompatActivity {
                 Bundle b = new Bundle();
                 b.putLong("id", id); //Your id
                 i.putExtras(b); //Put your id to your next Intent
+                startActivity(i);
+                finish();
+            }
+        });
+
+        // Generating a qr code with data of the contact
+        qrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ShowContactActivity.this, QrCodeActivity.class);
+
+                long id = getIntent().getLongExtra("id",38);
+                String qrStr = QrCodeActivity.convertContactToString(firstnameTxt, lastnameTxt, phoneTxt, emailTxt, addressTxt);
+
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
+                i.putExtra("qrStr", qrStr);
                 startActivity(i);
                 finish();
             }

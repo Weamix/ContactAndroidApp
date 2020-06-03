@@ -23,12 +23,15 @@ public class QrCodeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_qr_code);
 
+        long id = getIntent().getLongExtra("id",38);
+        String qrData = getIntent().getStringExtra("qrStr");
+
         // ImageView to display the QR code in.  This should be defined in
         // your Activity's XML layout file
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
 
-        String qrData = "Data I want to encode in QR code";
-        int qrCodeDimention = 500;
+        //String qrData = "Data I want to encode in QR code";
+        //int qrCodeDimention = 400;
 
         /*QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
                 Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);*/
@@ -78,4 +81,15 @@ public class QrCodeActivity extends AppCompatActivity {
         bitmap.setPixels(pixels, 0, 350, 0, 0, bitMatrixWidth, bitMatrixHeight);
         return bitmap;
     }
+
+    public static String convertContactToString(String firstname, String lastname, String phone, String mail, String address) {
+        String qrData =  "CONTACT:" +
+                "FIRSTNAME:" + firstname +
+                "LASTNAME:" + lastname +
+                "PHONE:" + phone +
+                "MAIL:" + mail +
+                "ADDRESS:" + address;
+        return qrData;
+    }
+
 }
