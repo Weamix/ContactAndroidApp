@@ -46,8 +46,16 @@ public class QrCodeActivity extends AppCompatActivity {
         backqr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(QrCodeActivity.this, MainActivity.class);
-                startActivity(intent);
+
+                long id = getIntent().getLongExtra("id",38);
+                
+                Intent i = new Intent(QrCodeActivity.this, ShowContactActivity.class);
+
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                i.putExtras(b); //Put your id to your next Intent
+                startActivity(i);
+                finish();
             }
         });
     }
