@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
         Cursor cFav = db.fetchAllFavorites();
         startManagingCursor(cFav);
 
-        String[] from = new String[] {ContactsDbAdapter.KEY_NAME,ContactsDbAdapter.KEY_FIRSTNAME};
-        int[] to = new int[] { R.id.name,R.id.firstname};
+            String[] from = new String[]{ContactsDbAdapter.KEY_NAME, ContactsDbAdapter.KEY_FIRSTNAME};
+            int[] to = new int[]{R.id.name, R.id.firstname};
 
-        // Now create an array adapter and set it to display using our row
-        SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, cFav, from, to);
-        favs.setAdapter(contacts);
+            // Now create an array adapter and set it to display using our row
+            SimpleCursorAdapter contacts = new SimpleCursorAdapter(this, R.layout.activity_list_contacts, cFav, from, to);
+            favs.setAdapter(contacts);
     }
 
     @Override
@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
             // Menu contextual : Delete contact in favorite
             case R.id.delete_favorite:
                 db.deleteFavorite(SelectedTask);
+                return true;
 
             default:
                 return super.onContextItemSelected(item);
