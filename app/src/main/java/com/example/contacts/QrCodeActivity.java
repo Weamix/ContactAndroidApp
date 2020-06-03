@@ -1,7 +1,9 @@
 package com.example.contacts;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class QrCodeActivity extends AppCompatActivity {
     public final static int QRcodeWidth = 500;
     private static final int blue = 0xFFFFFFFF;
     private static final int white = 0xFF000000;
+    public static ImageView backqr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,19 @@ public class QrCodeActivity extends AppCompatActivity {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+
+        backqr = findViewById(R.id.backqr);
+
+        // Back to the previous intent
+        backqr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QrCodeActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     /**
@@ -84,5 +100,4 @@ public class QrCodeActivity extends AppCompatActivity {
                 "ADDRESS:" + address;
         return qrData;
     }
-
 }
