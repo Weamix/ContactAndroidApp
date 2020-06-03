@@ -1,10 +1,17 @@
 package com.example.contacts;
 
 import android.graphics.Bitmap;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
 
 public class QrCodeActivity {
 
     Bitmap bitmap ;
+    public final static int QRcodeWidth = 400;
+    private static final int QRCodeWhiteColor = 0xFFFFFFFF;
+    private static final int QRCodeBlackColor = 0xFF000000;
 
     /**
      * Source : https://www.it-swarm.dev/fr/android/android-comment-lire-le-code-qr-dans-mon-application/940979426/
