@@ -1,23 +1,52 @@
 package com.example.contacts;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 
-public class QrCodeActivity {
+public class QrCodeActivity extends AppCompatActivity {
 
     Bitmap bitmap ;
     public final static int QRcodeWidth = 400;
     private static final int blue = 0xFFFFFFFF;
     private static final int white = 0xFF000000;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_generate_qr_code);
+
+        // ImageView to display the QR code in.  This should be defined in
+        // your Activity's XML layout file
+        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+
+        String qrData = "Data I want to encode in QR code";
+        int qrCodeDimention = 500;
+
+        /*QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
+                Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);*/
+
+        try {
+            Bitmap bitmap = encodeAsBitmap(qrData);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * Source : https://www.it-swarm.dev/fr/android/android-comment-lire-le-code-qr-dans-mon-application/940979426/
      */
 
-    private Bitmap TextToImageEncode(String Value) throws WriterException {
+    private Bitmap encodeAsBitmap(String Value) throws WriterException {
         BitMatrix bitMatrix;
         try {
             bitMatrix = new MultiFormatWriter().encode(
