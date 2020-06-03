@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +26,8 @@ public class EditContactActivity extends AppCompatActivity {
     public static EditText phone;
     public static EditText email;
     public static EditText address;
-    public static Button add_contact;
+    public static ImageView add_contact;
+    public static ImageView backedit;
 
     // Variables link to the cursor to display data of one contact by id
     public String firstnameEdit;
@@ -79,6 +81,7 @@ public class EditContactActivity extends AppCompatActivity {
         address = findViewById(R.id.addressEdit);
 
         add_contact = findViewById(R.id.add_contact);
+        backedit = findViewById(R.id.backedit);
 
         // Db connection
         db = new ContactsDbAdapter(this);
@@ -106,6 +109,20 @@ public class EditContactActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 add_contact.setEnabled(true);
+            }
+        });
+
+        backedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long id = getIntent().getLongExtra("id",38);
+                Intent intent = new Intent(EditContactActivity.this, ShowContactActivity.class);
+                startActivity(intent);
+                Bundle b = new Bundle();
+                b.putLong("id", id); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+                finish();
             }
         });
     }
