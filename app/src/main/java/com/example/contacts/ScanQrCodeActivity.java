@@ -2,6 +2,9 @@ package com.example.contacts;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -12,7 +15,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
  * Source : https://demonuts.com/scan-barcode-qrcode/ :)
  */
 
-public class ScanQrCodeActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+public class ScanQrCodeActivity extends Activity implements ZXingScannerView.ResultHandler{
 
     private ZXingScannerView mScannerView;
 
@@ -46,5 +49,10 @@ public class ScanQrCodeActivity extends AppCompatActivity implements ZXingScanne
 
         // If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);
+
+        Intent intent = new Intent(ScanQrCodeActivity.this, ShowContactActivity.class);
+        intent.putExtra("action", "qrCode");
+        intent.putExtra("qrStr", rawResult.getText());
+        startActivity(intent);
     }
 }

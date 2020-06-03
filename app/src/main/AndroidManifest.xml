@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".QrCodeActivity">
         </activity>
+        <activity android:name=".ScanQrCodeActivity">
+        </activity>
     </application>
 
 </manifest>
